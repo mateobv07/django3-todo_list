@@ -1,0 +1,41 @@
+{% extends "todo/base.html" %}
+
+{% block content %}
+{%load static%}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5">
+            <h2>New Todo</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5">
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" class="form-control" id="title" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="memo">Description</label>
+                    <textarea name="memo" class="form-control" id="memo" ></textarea>
+                </div>
+                <br>
+                <div class="form-group form-check">
+                    <input type="checkbox" name="important" class="form-check-input" id="important">
+                    <label class="form-check-label" for="important">Important</label>
+                    <img src="{% static 'important2.png' %}" width="18" height="18" class="d-inline-block align-text-top">
+                </div>
+                <br>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

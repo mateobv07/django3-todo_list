@@ -1,0 +1,31 @@
+{% extends 'todo/base.html' %}
+
+{% block content%}
+
+{% load static%}
+
+<div class="row justify-content-center mt-5">
+    <div class="text-center">
+        <h1>{{ todos.count }} Completed Todo{{ todos.count|pluralize }}</h1>
+
+    </div>
+</div>
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <div class="list-group">
+           {% for todo in todos %}
+                <a href="{% url 'viewtodo' todo.id %}" class="list-group-item list-group-item-action{% if todo.important %} list-group-item-info{% endif %}">
+                    {% if todo.important %}
+                        <img src="{% static 'important2.png' %}" width="20" height="20" class="d-inline-block align-text-top">
+                    {% else %}
+                        -&nbsp&nbsp
+                    {% endif %}
+                    <b>&nbsp{{ todo.title }}&nbsp&nbsp&nbsp&nbsp&nbsp</b> - Completed {{ todo.datecompleted|date:'M j Y H:i' }}
+
+                </a>
+           {% endfor %}
+        </div>
+     </div>
+</div>
+{% endblock %}
